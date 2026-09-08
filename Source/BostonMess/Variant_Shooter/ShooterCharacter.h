@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include "Character/BostonMessCharacter.h"
 #include "CoreMinimal.h"
-#include "BostonMessCharacter.h"
 #include "ShooterWeaponHolder.h"
+
 #include "ShooterCharacter.generated.h"
 
 class AShooterWeapon;
@@ -24,46 +25,46 @@ UCLASS(abstract)
 class BOSTONMESS_API AShooterCharacter : public ABostonMessCharacter, public IShooterWeaponHolder
 {
 	GENERATED_BODY()
-	
+
 	/** AI Noise emitter component */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UPawnNoiseEmitterComponent* PawnNoiseEmitter;
 
 protected:
 
 	/** Fire weapon input action */
-	UPROPERTY(EditAnywhere, Category ="Input")
+	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* FireAction;
 
 	/** Switch weapon input action */
-	UPROPERTY(EditAnywhere, Category ="Input")
+	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* SwitchWeaponAction;
 
 	/** Name of the first person mesh weapon socket */
-	UPROPERTY(EditAnywhere, Category ="Weapons")
+	UPROPERTY(EditAnywhere, Category = "Weapons")
 	FName FirstPersonWeaponSocket = FName("HandGrip_R");
 
 	/** Name of the third person mesh weapon socket */
-	UPROPERTY(EditAnywhere, Category ="Weapons")
+	UPROPERTY(EditAnywhere, Category = "Weapons")
 	FName ThirdPersonWeaponSocket = FName("HandGrip_R");
 
 	/** Max distance to use for aim traces */
-	UPROPERTY(EditAnywhere, Category ="Aim", meta = (ClampMin = 0, ClampMax = 100000, Units = "cm"))
+	UPROPERTY(EditAnywhere, Category = "Aim", meta = (ClampMin = 0, ClampMax = 100000, Units = "cm"))
 	float MaxAimDistance = 10000.0f;
 
 	/** Max HP this character can have */
-	UPROPERTY(EditAnywhere, Category="Health")
+	UPROPERTY(EditAnywhere, Category = "Health")
 	float MaxHP = 500.0f;
 
 	/** Current HP remaining to this character */
 	float CurrentHP = 0.0f;
 
 	/** Team ID for this character*/
-	UPROPERTY(EditAnywhere, Category="Team")
+	UPROPERTY(EditAnywhere, Category = "Team")
 	uint8 TeamByte = 0;
 
 	/** Actor tag to grant this character when it dies */
-	UPROPERTY(EditAnywhere, Category="Team")
+	UPROPERTY(EditAnywhere, Category = "Team")
 	FName DeathTag = FName("Dead");
 
 	/** List of weapons picked up by the character */
@@ -72,7 +73,7 @@ protected:
 	/** Weapon currently equipped and ready to shoot with */
 	TObjectPtr<AShooterWeapon> CurrentWeapon;
 
-	UPROPERTY(EditAnywhere, Category ="Destruction", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
+	UPROPERTY(EditAnywhere, Category = "Destruction", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
 	float RespawnTime = 5.0f;
 
 	FTimerHandle RespawnTimer;
@@ -121,15 +122,15 @@ public:
 	virtual void DoJumpEnd()  override;
 
 	/** Handles start firing input */
-	UFUNCTION(BlueprintCallable, Category="Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void DoStartFiring();
 
 	/** Handles stop firing input */
-	UFUNCTION(BlueprintCallable, Category="Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void DoStopFiring();
 
 	/** Handles switch weapon input */
-	UFUNCTION(BlueprintCallable, Category="Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void DoSwitchWeapon();
 
 public:
@@ -174,7 +175,7 @@ protected:
 	void Die();
 
 	/** Called to allow Blueprint code to react to this character's death */
-	UFUNCTION(BlueprintImplementableEvent, Category="Shooter", meta = (DisplayName = "On Death"))
+	UFUNCTION(BlueprintImplementableEvent, Category = "Shooter", meta = (DisplayName = "On Death"))
 	void BP_OnDeath();
 
 	/** Called from the respawn timer to destroy this character and force the PC to respawn */

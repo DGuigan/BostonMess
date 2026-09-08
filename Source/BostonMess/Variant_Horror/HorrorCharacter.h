@@ -2,8 +2,9 @@
 
 #pragma once
 
+#include "Character/BostonMessCharacter.h"
 #include "CoreMinimal.h"
-#include "BostonMessCharacter.h"
+
 #include "HorrorCharacter.generated.h"
 
 class USpotLightComponent;
@@ -22,13 +23,13 @@ class BOSTONMESS_API AHorrorCharacter : public ABostonMessCharacter
 	GENERATED_BODY()
 
 	/** Player light source */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USpotLightComponent* SpotLight;
-	
+
 protected:
 
 	/** Fire weapon input action */
-	UPROPERTY(EditAnywhere, Category ="Input")
+	UPROPERTY(EditAnywhere, Category = "Input")
 	UInputAction* SprintAction;
 
 	/** If true, we're sprinting */
@@ -38,30 +39,30 @@ protected:
 	bool bRecovering = false;
 
 	/** Default walk speed when not sprinting or recovering */
-	UPROPERTY(EditAnywhere, Category="Walk")
+	UPROPERTY(EditAnywhere, Category = "Walk")
 	float WalkSpeed = 250.0f;
 
 	/** Time interval for sprinting stamina ticks */
-	UPROPERTY(EditAnywhere, Category="Sprint", meta = (ClampMin = 0, ClampMax = 1, Units = "s"))
+	UPROPERTY(EditAnywhere, Category = "Sprint", meta = (ClampMin = 0, ClampMax = 1, Units = "s"))
 	float SprintFixedTickTime = 0.03333f;
 
 	/** Sprint stamina amount. Maxes at SprintTime */
 	float SprintMeter = 0.0f;
 
 	/** How long we can sprint for, in seconds */
-	UPROPERTY(EditAnywhere, Category="Sprint", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
+	UPROPERTY(EditAnywhere, Category = "Sprint", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
 	float SprintTime = 3.0f;
 
 	/** Walk speed while sprinting */
-	UPROPERTY(EditAnywhere, Category="Sprint", meta = (ClampMin = 0, ClampMax = 10, Units = "cm/s"))
+	UPROPERTY(EditAnywhere, Category = "Sprint", meta = (ClampMin = 0, ClampMax = 10, Units = "cm/s"))
 	float SprintSpeed = 600.0f;
 
 	/** Walk speed while recovering stamina */
-	UPROPERTY(EditAnywhere, Category="Recovery", meta = (ClampMin = 0, ClampMax = 10, Units = "cm/s"))
+	UPROPERTY(EditAnywhere, Category = "Recovery", meta = (ClampMin = 0, ClampMax = 10, Units = "cm/s"))
 	float RecoveringWalkSpeed = 150.0f;
 
 	/** Time it takes for the sprint meter to recover */
-	UPROPERTY(EditAnywhere, Category="Recovery", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
+	UPROPERTY(EditAnywhere, Category = "Recovery", meta = (ClampMin = 0, ClampMax = 10, Units = "s"))
 	float RecoveryTime = 0.0f;
 
 	/** Sprint tick timer */
@@ -96,7 +97,7 @@ protected:
 	void DoStartSprint();
 
 	/** Stops sprinting behavior */
-	UFUNCTION(BlueprintCallable, Category="Input")
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void DoEndSprint();
 
 	/** Called while sprinting at a fixed time interval */
